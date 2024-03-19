@@ -1,0 +1,6 @@
+@quota.api_HostAddress = http://localhost:5014
+
+GET {{quota.api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
