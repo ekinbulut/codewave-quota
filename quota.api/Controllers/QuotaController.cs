@@ -20,7 +20,7 @@ public class QuotaController : ControllerBase
     [ProducesResponseType(typeof(QuotaHttpResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Get([FromQuery]string id)
+    public async Task<IActionResult> GetAsync([FromQuery] string id)
     {
         var response = await _quotaControllerHandler.HandleAsync(new QuotaHttpRequest()
         {
@@ -28,5 +28,17 @@ public class QuotaController : ControllerBase
         });
         return Ok(response);
     }
-    
+
+    [HttpGet("{userId}")]
+    [ProducesResponseType(typeof(QuotaHttpResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetByUserIdAsync([FromRoute] string userId)
+    {
+        var response = await _quotaControllerHandler.HandleAsync(new QuotaHttpRequest()
+        {
+            UserId = userId
+        });
+        return Ok(response);
+    }
 }
